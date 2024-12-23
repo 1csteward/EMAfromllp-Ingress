@@ -1,4 +1,34 @@
 {
-    "fields": null
-
+    "fields": [
+        {
+            "default": "65430",
+            "name": "Port",
+            "options": "",
+            "type": "port"
+        },
+        {
+            "default": "",
+            "name": "MessageEncoding",
+            "options": "",
+            "type": "string"
+        },
+        {
+            "default": "\\x0B",
+            "name": "LLPPrefix",
+            "options": "",
+            "type": "string"
+        },
+        {
+            "default": "\\x1C\\x0D",
+            "name": "LLPSuffix",
+            "options": "",
+            "type": "string"
+        },
+        {
+            "default": "Fast",
+            "name": "AckGeneration",
+            "options": "Fast,Custom",
+            "type": "list"
+        }
+    ]
 }
