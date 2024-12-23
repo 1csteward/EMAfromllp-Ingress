@@ -1,7 +1,5 @@
---require "VALID.VALIDerrorCheck"
 --Convert hex values to octal values
 function CONNsetPreffixSuffix(HexValues)
-   --VALIDerrorCheck()
    local values = string.split(HexValues,[[\]])
    table.remove(values,1)
    trace(values)

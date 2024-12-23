@@ -1,12 +1,6 @@
 {
     "fields": [
         {
-            "default": "65430",
-            "name": "Port",
-            "options": "",
-            "type": "port"
-        },
-        {
             "default": "",
             "name": "MessageEncoding",
             "options": "",
@@ -23,6 +17,18 @@
             "name": "LLPSuffix",
             "options": "",
             "type": "string"
+        },
+        {
+            "default": "65430",
+            "name": "Port",
+            "options": "",
+            "type": "port"
+        },
+        {
+            "default": "30",
+            "name": "ConnectionTimeout",
+            "options": "",
+            "type": "number"
         },
         {
             "default": "Fast",

@@ -4,7 +4,7 @@ local LLP_MESSAGE_SUFFIX
 
 local LLPconnections = {}
 local LLP_DEBUG = false
-local LLP_TIMEOUT = 60
+local LLP_TIMEOUT = Configs.ConnectionTimeout
 
 local function LLPpurgeIdleConnections()
    local now = os.time()
