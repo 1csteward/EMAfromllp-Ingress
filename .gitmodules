@@ -1,0 +1,3 @@
+[submodule "STAT"]
+	path = STAT
+	url = https://bitbucket.org/interfaceware/status.git

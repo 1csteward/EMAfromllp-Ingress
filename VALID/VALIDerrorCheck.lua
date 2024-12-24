@@ -18,22 +18,34 @@ local function ValidHexFormat(input)
 end
 
 function VALIDerrorCheck()
-   --Remove white sapce from Prefix/suffix
+   -- Remove white sapce from Prefix/suffix
    component.setField{key='LLPPrefix',value=component.fields().LLPPrefix:gsub('%s','')}
    component.setField{key='LLPSuffix',value=component.fields().LLPSuffix:gsub('%s','')}
    local Configs = component.fields()
    local Separator = os.posix() and [[/]] or [[\]]
-   --Check file encoding
+   -- Check file encoding
    if not Encodings[Configs.MessageEncoding] then
       error('File encoding '..Configs.MessageEncoding..' is not supported.')
    end
-
+   -- Check port
    if Configs.Port == 0 then
       error('Port field is empty.')
    end
-
+   -- Check format of prefix and suffix
    if not (ValidHexFormat(Configs.LLPPrefix) and ValidHexFormat(Configs.LLPSuffix)) then
       error('LLP prefix/suffix is invalid.\nInput must begin with \\x and hex values must be between 0-9 and A-F.\nExample: \\x0B')
+   end
+   -- Check certificate file  
+   if not (Configs.SslCertificate == '') then
+      if not (os.fs.access(Configs.SslCertificate)) then
+         error('Unable to access SSL certificate file:\n'..Configs.SslCertificate)
+      end
+   end
+   -- Check key file
+   if not (Configs.SslKey == '') then
+      if not (os.fs.access(Configs.SslKey)) then
+         error('Unable to access SSL key file:\n'..Configs.SslKey)
+      end
    end
 
 end

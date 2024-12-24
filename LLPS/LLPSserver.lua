@@ -6,6 +6,14 @@ local LLPconnections = {}
 local LLP_DEBUG = false
 local LLP_TIMEOUT = Configs.ConnectionTimeout
 
+local CONN_DETAILS = {
+   port = Configs.Port,
+   ssl = {
+      cert = Configs.SslCertificate,
+      key = Configs.SslKey
+   }
+}
+
 local function LLPpurgeIdleConnections()
    local now = os.time()
    for id, connection in pairs(LLPconnections) do
@@ -75,20 +83,30 @@ socket.onWrite = function(Id)
    LLPpurgeIdleConnections()
 end
 
--- TODO - we don't have an error callback
 socket.onClose = function(Data, Id)
-   local log_message = "Connection " .. tostring(Id) .. " closed"
-   if #Data > 0 then
-      log_message = log_message .. " with non-empty buffer: " .. Data:sub(1, 1024)
+   local function CloseConn()
+      local log_message = "Connection " .. tostring(Id) .. " closed"
+      if #Data > 0 then
+         log_message = log_message .. " with non-empty buffer: " .. Data:sub(1, 1024)
+      end
+      if LLP_DEBUG then
+         iguana.logInfo(log_message)
+      end
+      LLPconnections[Id] = nil
+      LLPpurgeIdleConnections()
    end
-   if LLP_DEBUG then
-      iguana.logInfo(log_message)
+
+   -- Error callback mechanism
+   local success, err = pcall(CloseConn)
+   if not success then
+      local error_message = "Error in socket.onClose for Connection ID " .. tostring(Id) .. ": " .. tostring(err)
+      if LLP_DEBUG then
+         iguana.logError(error_message)
+      end
    end
-   LLPconnections[Id] = nil
-   LLPpurgeIdleConnections()
 end
 
 function LLPstart()
    local Config = component.fields()
-   socket.listen_a{port=Config.Port}
+   socket.listen_a(CONN_DETAILS)
 end

@@ -35,6 +35,18 @@
             "name": "AckGeneration",
             "options": "Fast,Custom",
             "type": "list"
+        },
+        {
+            "default": "",
+            "name": "SslCertificate",
+            "options": "",
+            "type": "file"
+        },
+        {
+            "default": "",
+            "name": "SslKey",
+            "options": "",
+            "type": "file"
         }
     ]
 }

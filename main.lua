@@ -1,3 +1,5 @@
+require "CARDupdate"
+require "STAT.STATstatus"
 require "VALID.VALIDsetEncoding"
 require "VALID.VALIDencodings"
 require "VALID.VALIDerrorCheck"
@@ -27,5 +29,6 @@ function main(Message)
       Ack = ACKcustomAck(Message)
    end
    iguana.logInfo("Generated ACK\n"..Ack, MessageId)
+   component.setStatus{data=CARDupdate("Data last received at", os.date("%Y/%m/%d %H:%M:%S"))}
    return Ack
 end
