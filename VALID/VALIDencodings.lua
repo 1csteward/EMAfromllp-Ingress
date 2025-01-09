@@ -1,4 +1,4 @@
---List of supported encodings
+-- List of supported encodings
 local VALIDsupportedEncodings = {
 
    ["BIG5-HKSCS"] = true,

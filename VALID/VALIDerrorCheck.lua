@@ -36,15 +36,15 @@ function VALIDerrorCheck()
       error('LLP prefix/suffix is invalid.\nInput must begin with \\x and hex values must be between 0-9 and A-F.\nExample: \\x0B')
    end
    -- Check certificate file  
-   if not (Configs.SslCertificate == '') then
-      if not (os.fs.access(Configs.SslCertificate)) then
-         error('Unable to access SSL certificate file:\n'..Configs.SslCertificate)
+   if not (Configs.SSLCertificate == '') then
+      if not (os.fs.access(Configs.SSLCertificate)) then
+         error('Unable to access SSL certificate file:\n'..Configs.SSLCertificate)
       end
    end
    -- Check key file
-   if not (Configs.SslKey == '') then
-      if not (os.fs.access(Configs.SslKey)) then
-         error('Unable to access SSL key file:\n'..Configs.SslKey)
+   if not (Configs.SSLKey == '') then
+      if not (os.fs.access(Configs.SSLKey)) then
+         error('Unable to access SSL key file:\n'..Configs.SSLKey)
       end
    end
 

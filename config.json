@@ -1,6 +1,30 @@
 {
     "fields": [
         {
+            "default": "65430",
+            "name": "Port",
+            "options": "",
+            "type": "port"
+        },
+        {
+            "default": "30",
+            "name": "ConnectionTimeout",
+            "options": "",
+            "type": "number"
+        },
+        {
+            "default": "",
+            "name": "SSLCertificate",
+            "options": "",
+            "type": "file"
+        },
+        {
+            "default": "",
+            "name": "SSLKey",
+            "options": "",
+            "type": "file"
+        },
+        {
             "default": "",
             "name": "MessageEncoding",
             "options": "",
@@ -19,34 +43,16 @@
             "type": "string"
         },
         {
-            "default": "65430",
-            "name": "Port",
-            "options": "",
-            "type": "port"
-        },
-        {
-            "default": "30",
-            "name": "ConnectionTimeout",
-            "options": "",
-            "type": "number"
-        },
-        {
             "default": "Fast",
             "name": "AckGeneration",
             "options": "Fast,Custom",
             "type": "list"
         },
         {
-            "default": "",
-            "name": "SslCertificate",
+            "default": "false",
+            "name": "UseDebugLogs",
             "options": "",
-            "type": "file"
-        },
-        {
-            "default": "",
-            "name": "SslKey",
-            "options": "",
-            "type": "file"
+            "type": "bool"
         }
     ]
 }

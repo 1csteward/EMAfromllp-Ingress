@@ -3,14 +3,14 @@ local LLP_MESSAGE_PREFIX
 local LLP_MESSAGE_SUFFIX
 
 local LLPconnections = {}
-local LLP_DEBUG = false
+local LLP_DEBUG = Configs.UseDebugLogs
 local LLP_TIMEOUT = Configs.ConnectionTimeout
 
 local CONN_DETAILS = {
    port = Configs.Port,
    ssl = {
-      cert = Configs.SslCertificate,
-      key = Configs.SslKey
+      cert = Configs.SSLCertificate,
+      key = Configs.SSLKey
    }
 }
 

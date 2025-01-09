@@ -1,12 +1,12 @@
 require "CARDupdate"
 require "STAT.STATstatus"
 require "VALID.VALIDsetEncoding"
-require "VALID.VALIDencodings"
 require "VALID.VALIDerrorCheck"
 require "CONN.CONNsetPrefixSuffix"
 require "ACK.ACKcustomAck"
 require "ACK.ACKfastAck"
 require "LLPS.LLPSserver"
+
 local Configs = component.fields()
 
 -- The main function is called when a message is received by the server
@@ -20,7 +20,7 @@ function main(Message)
       VALIDerrorCheck()
       return
    end
-   
+   Message = iconv.convert(Message, Configs.MessageEncoding, 'UTF-8')
    local MessageId = queue.push{data=Message}
    local Ack
    if Configs.AckGeneration == 'Fast' then
@@ -28,7 +28,7 @@ function main(Message)
    else
       Ack = ACKcustomAck(Message)
    end
-   iguana.logInfo("Generated ACK\n"..Ack, MessageId)
+   iguana.logInfo("#ack Generated ACK\n"..Ack, MessageId)
    component.setStatus{data=CARDupdate("Data last received at", os.date("%Y/%m/%d %H:%M:%S"))}
    return Ack
 end

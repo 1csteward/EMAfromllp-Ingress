@@ -1,4 +1,4 @@
---Convert hex values to octal values
+-- Convert hex values to octal values
 function CONNsetPreffixSuffix(HexValues)
    local values = string.split(HexValues,[[\]])
    table.remove(values,1)
