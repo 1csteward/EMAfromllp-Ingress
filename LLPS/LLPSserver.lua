@@ -15,13 +15,15 @@ local CONN_DETAILS = {
 }
 
 local function LLPpurgeIdleConnections()
-   local now = os.time()
-   for id, connection in pairs(LLPconnections) do
-      if now - connection.ts > LLP_TIMEOUT then
-         if LLP_DEBUG then
-            iguana.logDebug("Closing idle connection " .. tostring(Id))
+   if EnableConnectionTimeout then
+      local now = os.time()
+      for id, connection in pairs(LLPconnections) do
+         if now - connection.ts > LLP_TIMEOUT then
+            if LLP_DEBUG then
+               iguana.logDebug("Closing idle connection " .. tostring(Id))
+            end
+            socket.close_a{connection=id}
          end
-         socket.close_a{connection=id}
       end
    end
 end

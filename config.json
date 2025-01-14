@@ -7,6 +7,12 @@
             "type": "port"
         },
         {
+            "default": "true",
+            "name": "EnableConnectionTimeout",
+            "options": "",
+            "type": "bool"
+        },
+        {
             "default": "30",
             "name": "ConnectionTimeout",
             "options": "",
