@@ -14,6 +14,11 @@ local CONN_DETAILS = {
    }
 }
 
+if Configs.VerifyPeer then
+   CONN_DETAILS.ssl.verify_peer = Configs.VerifyPeer
+   CONN_DETAILS.ssl.ca_file = Configs.CaFile
+end
+
 local function LLPpurgeIdleConnections()
    if EnableConnectionTimeout then
       local now = os.time()
@@ -85,11 +90,19 @@ socket.onWrite = function(Id)
    LLPpurgeIdleConnections()
 end
 
-socket.onClose = function(Data, Id)
+socket.onClose = function(Data, Id, Err)
    local function CloseConn()
       local log_message = "Connection " .. tostring(Id) .. " closed"
       if #Data > 0 then
          log_message = log_message .. " with non-empty buffer: " .. Data:sub(1, 1024)
+      end
+      if Err then
+         if Err:match('wrong version number') then
+            log_message = log_message .. " due to error: " .. Err .. '\nTry verifying the SSL settings on the sender and receiver'
+         else
+            log_message = log_message .. " due to error: " .. Err
+         end
+         iguana.logError(log_message)
       end
       if LLP_DEBUG then
          iguana.logInfo(log_message)
@@ -109,6 +122,5 @@ socket.onClose = function(Data, Id)
 end
 
 function LLPstart()
-   local Config = component.fields()
    socket.listen_a(CONN_DETAILS)
 end

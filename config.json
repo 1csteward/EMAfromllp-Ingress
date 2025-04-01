@@ -31,6 +31,18 @@
             "type": "file"
         },
         {
+            "default": "false",
+            "name": "VerifyPeer",
+            "options": "",
+            "type": "bool"
+        },
+        {
+            "default": "",
+            "name": "CaFile",
+            "options": "",
+            "type": "file"
+        },
+        {
             "default": "",
             "name": "MessageEncoding",
             "options": "",

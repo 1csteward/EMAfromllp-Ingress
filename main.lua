@@ -13,11 +13,11 @@ local Configs = component.fields()
 -- An ACKnowledgement message must be returned when it exits
 function main(Message)
    if (Message == "INIT") then
-      LLPstart()
       if Configs.MessageEncoding == '' then
          VALIDsetEncoding()
       end
       VALIDerrorCheck()
+      LLPstart()
       return
    end
    Message = iconv.convert(Message, Configs.MessageEncoding, 'UTF-8')

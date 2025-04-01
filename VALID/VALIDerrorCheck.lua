@@ -23,6 +23,7 @@ function VALIDerrorCheck()
    component.setField{key='LLPSuffix',value=component.fields().LLPSuffix:gsub('%s','')}
    local Configs = component.fields()
    local Separator = os.posix() and [[/]] or [[\]]
+   local SslValid = false
    -- Check file encoding
    if not Encodings[Configs.MessageEncoding] then
       error('File encoding '..Configs.MessageEncoding..' is not supported.')
@@ -35,16 +36,22 @@ function VALIDerrorCheck()
    if not (ValidHexFormat(Configs.LLPPrefix) and ValidHexFormat(Configs.LLPSuffix)) then
       error('LLP prefix/suffix is invalid.\nInput must begin with \\x and hex values must be between 0-9 and A-F.\nExample: \\x0B')
    end
-   -- Check certificate file  
-   if not (Configs.SSLCertificate == '') then
-      if not (os.fs.access(Configs.SSLCertificate)) then
-         error('Unable to access SSL certificate file:\n'..Configs.SSLCertificate)
+   -- Check certificate and key files  
+   if not (Configs.SSLCertificate == '') or not (Configs.SSLKey == '') then
+      if (Configs.SSLCertificate == '') or (Configs.SSLKey == '') then error('Both SSLCertificate and SSLKey must be specified to use SSL.')
+      elseif not (os.fs.access(Configs.SSLCertificate)) then
+         error('Unable to access SSL certificate file:\n'..Configs.SSLCertificate)      
+      elseif not (os.fs.access(Configs.SSLKey)) then
+         error('Unable to access SSL key file:\n'..Configs.SSLKey)
+      else
+         SslValid = true
       end
    end
-   -- Check key file
-   if not (Configs.SSLKey == '') then
-      if not (os.fs.access(Configs.SSLKey)) then
-         error('Unable to access SSL key file:\n'..Configs.SSLKey)
+   -- Check verify peer
+   if SslValid and Configs.VerifyPeer then
+      if (Configs.CaFile == '') then error('CaFile must be specified to use VerifyPeer.')
+      elseif not (os.fs.access(Configs.CaFile)) then
+         error('Unable to access Certificate Authority file:\n'..Configs.CaFile)
       end
    end
 
