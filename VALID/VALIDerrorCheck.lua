@@ -53,6 +53,6 @@ function VALIDerrorCheck()
       elseif not (os.fs.access(Configs.CaFile)) then
          error('Unable to access Certificate Authority file:\n'..Configs.CaFile)
       end
-   end
+   elseif Configs.VerifyPeer then error('SSL must be enabled to use VerifyPeer') end
 
 end
