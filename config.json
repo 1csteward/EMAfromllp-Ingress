@@ -4,73 +4,73 @@
             "default": "65430",
             "name": "Port",
             "options": "",
-            "type": "port"
+            "type": "Port"
         },
         {
             "default": "true",
             "name": "EnableConnectionTimeout",
             "options": "",
-            "type": "bool"
+            "type": "Bool"
         },
         {
             "default": "30",
             "name": "ConnectionTimeout",
             "options": "",
-            "type": "number"
+            "type": "Number"
         },
         {
             "default": "",
             "name": "SSLCertificate",
             "options": "",
-            "type": "file"
+            "type": "File"
         },
         {
             "default": "",
             "name": "SSLKey",
             "options": "",
-            "type": "file"
+            "type": "File"
         },
         {
             "default": "false",
             "name": "VerifyPeer",
             "options": "",
-            "type": "bool"
+            "type": "Bool"
         },
         {
             "default": "",
             "name": "CaFile",
             "options": "",
-            "type": "file"
+            "type": "File"
         },
         {
-            "default": "",
+            "default": "ASCII",
             "name": "MessageEncoding",
             "options": "",
-            "type": "string"
+            "type": "String"
         },
         {
             "default": "\\x0B",
             "name": "LLPPrefix",
             "options": "",
-            "type": "string"
+            "type": "String"
         },
         {
             "default": "\\x1C\\x0D",
             "name": "LLPSuffix",
             "options": "",
-            "type": "string"
+            "type": "String"
         },
         {
             "default": "Fast",
             "name": "AckGeneration",
             "options": "Fast,Custom",
-            "type": "list"
+            "type": "List"
         },
         {
             "default": "false",
             "name": "UseDebugLogs",
             "options": "",
-            "type": "bool"
+            "type": "Bool"
         }
     ]
 }
