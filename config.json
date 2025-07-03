@@ -43,7 +43,7 @@
             "type": "File"
         },
         {
-            "default": "ASCII",
+            "default": "UTF-8",
             "name": "MessageEncoding",
             "options": "",
             "type": "String"
