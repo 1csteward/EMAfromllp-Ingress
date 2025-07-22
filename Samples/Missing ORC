@@ -8,7 +8,6 @@ DG1|2||790.4|ELEVATION LEVELS TRANSAMINASE/LDH|||
 DG1|3||577.0|ACUTE PANCREATITIS|||
 DG1|4||V44.1|GASTROSTOMY STATUS|||
 DG1|5||578.9|UNS HEMORR GASTROINTESTINAL TRACT|||
-ORC|NW|PATH22_55|||||||20130201113900|||^Test^Provider^A
 OBR|1|PATH22_55||1^Histology|||20130202165824||||||||Splenic Flexure||||||||||||||||||||||||Any comments are placed here.
 OBX|1|TX|Specimen Jar#||1
 OBX|2|TX|Specimen Test Requested||Histology
