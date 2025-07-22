@@ -1,0 +1,24 @@
+MSH|^~\&|MMGI|PATH22|||20130201113900||ORM^O01|304eadfd-3b65-4ef0-9366-b54e224d4eed|P|2.3.1
+PID|1||11111||Big^John^M.||19490117|F|||401 Cherry DR^^Boca^FL^33427||(888)577-8801^PRN^PH^^^^8885578801||||||987654321
+PV1|1|O|||||1456985478^Test^Provider^A|5698547852^Test2^Referring^E^^
+IN1|1||BCBSP|Blue Cross Blue Shield PPO|Po Box 3248^^Omaha^NE^68180||(800)642-8516^WPN^PH^^^^8006428516|GRP1||||20120401|20130330|||Test^John^^|SELF|19490117|401 Cherry DR^^Boca^FL^33427|||1||||||||||||||POL1|||||||M
+GT1|1||Test^John^Biggy^||401 Cherry DR^^Boca^FL^33427|(888)577-8801^PRN^PH^^^^8885778801|||||SELF|987654321||||MMGI Inc.||
+DG1|1||K22.719|Barrett's esophagus with dysplasia, unspecified|||
+DG1|2||790.4|ELEVATION LEVELS TRANSAMINASE/LDH|||
+DG1|3||577.0|ACUTE PANCREATITIS|||
+DG1|4||V44.1|GASTROSTOMY STATUS|||
+DG1|5||578.9|UNS HEMORR GASTROINTESTINAL TRACT|||
+ORC|NW|PATH22_55|||||||20130201113900|||^Test^Provider^A
+OBR|1|PATH22_55||1^Histology|||20130202165824||||||||Splenic Flexure||||||||||||||||||||||||Any comments are placed here.
+OBX|1|TX|Specimen Jar#||1
+OBX|2|TX|Specimen Test Requested||Histology
+OBX|3|TX|Specimen Finding||Mass
+OBX|4|TX|Specimen Location||Splenic Flexure
+OBX|5|TX|Specimen Intervention||Biopsy
+OBX|6|TX|Specimen Comments||Any comments are placed here.
+NTE|1|TX|Specimen Jar#|1
+NTE|2|TX|Specimen Test Requested|Histology
+NTE|3|TX|Specimen Finding|Mass
+NTE|4|TX|Specimen Location|Splenic Flexure
+NTE|5|TX|Specimen Intervention|Biopsy
+NTE|6|TX|Specimen Comments|Any comments are placed here.
