@@ -28,17 +28,9 @@ function NACK(Message, Code, Text)
    local Fields = MSH:split(FS)
    local MsgId = Fields[10] or "UNKNOWN"
 
-   -- Swap sending and receiving application
-   Fields[9] = Fields[3]
-   Fields[3] = Fields[5]
-   Fields[5] = Fields[9]
-
-   -- Swap sending and receiving facility
-   Fields[9] = Fields[4]
-   Fields[4] = Fields[6]
-   Fields[6] = Fields[9]
-
-   Fields[9] = "ACK"
+   -- Replace ORM with ACK in MSH-9
+   local MsgType = Fields[9] or ""
+   Fields[9] = MsgType:gsub("ORM", "ACK")
    Fields[10] = "A" .. MsgId
 
    local MSA = "\rMSA|"..ErrorCode.."|"..MsgId
@@ -46,5 +38,5 @@ function NACK(Message, Code, Text)
       MSA = MSA .. "|" .. Text
    end
 
-   return table.concat(Fields, FS) .. MSA
+   return table.concat(Fields, FS) .. MSA .. '\x1c\r'
 end

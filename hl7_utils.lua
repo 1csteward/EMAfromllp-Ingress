@@ -76,7 +76,7 @@ function hl7_utils.validateMessage(rawHL7)
    local segments = splitSegments(rawHL7)
 
    -- Required segments
-   for _, seg in ipairs({ "MSH", "PID", "ORC", "OBX" }) do
+   for _, seg in ipairs({ "MSH", "PID", "ORC", "OBR", "NTE", "DG1", "OBX" }) do
       if not segmentExists(segments, seg) then
          iguana.logError("Validation failed: Missing required segment ["..seg.."]")
          return false, "AR", "Missing required segment ["..seg.."]"
@@ -84,7 +84,7 @@ function hl7_utils.validateMessage(rawHL7)
    end
 
    -- Non-repeating segments
-   for _, seg in ipairs({ "MSH", "PID", "PV1", "GT1", "ORC", "ZEF" }) do
+   for _, seg in ipairs({ "MSH", "PID", "GT1", "ORC" }) do
       local count = segmentCount(segments, seg)
       if count > 1 then
          iguana.logError("Validation failed: Segment ["..seg.."] occurs "..count.." times but must not repeat.")
@@ -92,23 +92,23 @@ function hl7_utils.validateMessage(rawHL7)
       end
    end
 
-   -- ZEF validation
-   if segmentExists(segments, "ZEF") then
+   -- OBX validation
+   if segmentExists(segments, "OBX") then
       local ok, parsed = pcall(hl7.parse, {vmd = "lab_orders.vmd", data = rawHL7})
       if not ok then
-         iguana.logError("Validation failed: Could not parse message for ZEF decoding.")
-         return false, "AR", "Could not parse message for ZEF decoding."
+         iguana.logError("Validation failed: Could not parse message for OBX decoding.")
+         return false, "AR", "Could not parse message for OBX decoding."
       end
 
-      local zef = parsed.ZEF[2]
-      if not zef then
-         iguana.logError("Validation failed: No ZEF segment found in parsed structure.")
-         return false, "AR", "No ZEF segment found in parsed structure."
+      local obx = parsed.OBX[1]
+      if not obx then
+         iguana.logError("Validation failed: No OBX segment found in parsed structure.")
+         return false, "AR", "No OBX segment found in parsed structure."
       end
 
-      if not isValidBase64Pdf(zef) then
-         iguana.logError("Validation failed: ZEF[2] is not a valid base64-encoded PDF.")
-         return false, "AR", "ZEF[2] is not a valid base64-encoded PDF."
+      if not isValidBase64Pdf(obx[5][5]) then
+         iguana.logError("Validation failed: OBX[5] is not a valid base64-encoded PDF.")
+         return false, "AR", "OBX[5] is not a valid base64-encoded PDF."
       end
    end
 

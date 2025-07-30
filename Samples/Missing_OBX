@@ -1,0 +1,12 @@
+
+MSH|^~\&|MM|castle|1006|swann|20250728191742||ORM^O01|67917-20250728191742|P|2.5.1|
+PID|1|31727087|MM0000000779||THOMPSON^JAMES^PATRICK||19671125|M|||3348 w bluffview^^Springfield^MO^65810||^^^~4178303522||||||495867989
+IN1|1||68069|Ambetter|PO Box 5010^^Farmington^MO^636405010||||||||||COMMERCIAL_OTHER|THOMPSON^JAMES^|SELF||^^^^|||1||||||||||||||U9158246701|||||||||||T
+GT1|1||THOMPSON^JAMES^PATRICK||3348 w bluffview^^Springfield^MO^65810||||||SEL
+ORC|NW|67917-A||67917|||||20250728191742|||1508419979^Miller^Lori
+OBR|1|67917-A|A|C43.59^Castle DecisionDx - Melanoma Gene Expression Profile Test||20250728191742|20250728141409-0500||||||Morphology: ;DDX: Superficial Spreading Melanoma;Location: left superior upper back;||^^^left superior upper back|1508419979^Miller^Lori|||||||||F||||||
+NTE|1|Specimen Label|DecisionDx
+NTE|2|Specimen Source|A) left superior upper back
+NTE|3|Morphology|
+NTE|4|Procedure Name|Castle DecisionDx - Melanoma
+DG1|1||C43.59^Malignant melanoma of other part of trunk^I10

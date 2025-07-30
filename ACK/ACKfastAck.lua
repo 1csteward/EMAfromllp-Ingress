@@ -8,19 +8,14 @@ function ACKfastAck(Message)
    -- MSH segment
    local MshFields = Message:split(FieldSeparator)
    local MessageControlId = MshFields[10]
-   -- swap Sending and Receiving Application
-   MshFields[9] = MshFields[3]
-   MshFields[3] = MshFields[5]
-   MshFields[5] = MshFields[9]
-   -- swap Sending and Receiving Facility
-   MshFields[9] = MshFields[4]
-   MshFields[4] = MshFields[6]
-   MshFields[6] = MshFields[9]
+
+   -- Replace ORM with ACK
+   local MsgType = MshField[9] or ""
    -- Message Type
-   MshFields[9] = 'ACK'
+   MshFields[9] = MsgType:gsub("ORM", "ACK")
    -- Message Control ID
    MshFields[10] = 'A'..MessageControlId
    -- MSA segment
    local MsaSegment = "\rMSA|AA|"..MessageControlId
-   return table.concat(MshFields, FieldSeparator)..MsaSegment
+   return table.concat(MshFields, FieldSeparator).. MsaSegment .. '\x1c\r'
 end
