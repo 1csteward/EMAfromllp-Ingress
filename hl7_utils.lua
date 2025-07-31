@@ -15,10 +15,13 @@ local hl7_utils = {}
 -- Purpose: Ensures consistent segment delimiter (\r)
 -- =============================================================================
 local function normalizeDelimiters(s)
-   s = s:gsub("\r\n", "\r")
-   s = s:gsub("\n", "\r")
+   s = s:gsub("^\239\187\191", "")      -- Strip UTF-8 BOM if present
+   s = s:gsub("^[%s%c]*", "")           -- Remove leading whitespace/control chars
+   s = s:gsub("\r\n", "\r")             -- Normalize CRLF to CR
+   s = s:gsub("\n", "\r")               -- Normalize LF to CR
    return s
 end
+
 
 -- =============================================================================
 -- Function: splitSegments
@@ -73,6 +76,10 @@ end
 --         false, errorCode, errorMessage if invalid
 -- =============================================================================
 function hl7_utils.validateMessage(rawHL7)
+   -- Normalize Message
+   rawHL7 = normalizeDelimiters(rawHL7)
+   
+   -- Split Segments
    local segments = splitSegments(rawHL7)
 
    -- Required segments
@@ -100,13 +107,13 @@ function hl7_utils.validateMessage(rawHL7)
          return false, "AR", "Could not parse message for OBX decoding."
       end
 
-      local obx = parsed.OBX[1]
+      local obx = parsed.OBX[5]
       if not obx then
          iguana.logError("Validation failed: No OBX segment found in parsed structure.")
          return false, "AR", "No OBX segment found in parsed structure."
       end
 
-      if not isValidBase64Pdf(obx[5][5]) then
+      if not isValidBase64Pdf(obx) then
          iguana.logError("Validation failed: OBX[5] is not a valid base64-encoded PDF.")
          return false, "AR", "OBX[5] is not a valid base64-encoded PDF."
       end
